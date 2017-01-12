@@ -1,6 +1,5 @@
 import React from 'react';
 import Client from '../../Client';
-import config from '../../../../config';
 
 export default React.createClass({
     saveJeey: function (event) {
@@ -19,8 +18,7 @@ export default React.createClass({
         return {
             jeey: {
                 text: ''
-            },
-            config: config
+            }
         };
     },
     render: function () {
