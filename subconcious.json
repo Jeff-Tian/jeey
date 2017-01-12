@@ -1,0 +1,9 @@
+{
+  "name": "jeey",
+  "port": 11111,
+  "npm": [
+    ".",
+    "client"
+  ],
+  "main": "app.js"
+}
