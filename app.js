@@ -20,7 +20,19 @@ app.use(logger());
 require('./routes')(app, router, render);
 
 if (['producation', 'prd', 'uat', 'qa'].indexOf(process.env.NODE_ENV) >= 0) {
-    app.use(serveStatic('client/build'));
+    app.use(
+        serveStatic(
+            'client/build',
+            {
+                etag: true,
+                maxage: 1000 * 3600 * 24 * 30,
+                gzip: true,
+                // setHeaders: function (res, path, stats) {
+                //     res.setHeader('Access-Control-Allow-Origin', '*');
+                // }
+            }
+        )
+    );
 }
 
 if (!module.parent) {
