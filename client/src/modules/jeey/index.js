@@ -1,5 +1,4 @@
 import React from 'react';
-import Client from '../../Client';
 
 export default React.createClass({
     saveJeey: function (event) {
