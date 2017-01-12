@@ -26,5 +26,5 @@ if (['producation', 'prd', 'uat', 'qa'].indexOf(process.env.NODE_ENV) >= 0) {
 if (!module.parent) {
     var port = process.env.PORT || config.port || 11111;
     app.listen(port);
-    console.log('Running %s site at: http://localhost:%d', config.mode, port);
+    console.log('Running %s site at: http://localhost:%d', config.mode || process.env.NODE_ENV, port);
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Jeey from './modules/jeey/index';
 
 const App = React.createClass({
     getInitialState: function () {
@@ -8,7 +9,7 @@ const App = React.createClass({
         return (
             <div className='App'>
                 <div className='ui container'>
-                    Hello
+                    <Jeey></Jeey>
                 </div>
             </div>
         );
