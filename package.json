@@ -13,6 +13,7 @@
     "babel-core": "6.14.0",
     "babel-preset-es2015": "6.14.0",
     "babel-preset-stage-0": "6.5.0",
+    "classnames": "^2.2.5",
     "co-body": "^4.2.0",
     "co-request": "^1.0.0",
     "co-views": "^2.1.0",

@@ -1,10 +1,19 @@
+'use strict';
+
 import React from 'react';
+import Client from '../../Client';
+import classNames from 'classnames';
 
 export default React.createClass({
     saveJeey: function (event) {
+        let self = this;
         event.preventDefault();
 
-        console.log(this.state.jeey);
+        Client.saveJeey(this.state.jeey, this)
+            .then(function (result) {
+                console.log(result);
+            })
+        ;
     },
     handleJeeyChange: function (event) {
         this.setState({
@@ -23,7 +32,15 @@ export default React.createClass({
     render: function () {
         return (
             <div className="ui container">
-                <form className="ui form" action="" onSubmit={this.saveJeey}>
+                <form className={classNames({
+                    'ui': true,
+                    'form': true,
+                    'error': this.state.error,
+                    'loading': this.state.loading
+                })} action="" onSubmit={this.saveJeey}>
+                    <div className="ui error message">
+                        <p>{this.state.errorMessage}</p>
+                    </div>
                     <div className="field">
                         <textarea placeholder="来叽歪点什么吧……" value={this.state.jeey.text}
                                   onChange={this.handleJeeyChange}></textarea>
