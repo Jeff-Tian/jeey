@@ -8,8 +8,26 @@ const Router = require('koa-router');
 
 const fs = require('fs');
 
+let readFileThunk = function (src) {
+    return new Promise(function (resolve, reject) {
+        fs.readFile(src, {'encoding': 'utf8'}, function (err, data) {
+            if (err) return reject(err);
+            resolve(data);
+        });
+    });
+};
+
+function renderIndex() {
+    return readFileThunk(__dirname + '/../client/build/index.html');
+}
+
+function * renderIndexResponse() {
+    this.body = yield renderIndex();
+}
+
 function helper(app, router, render) {
     router
+        .get('/:id', renderIndexResponse)
         .get('/healthcheck', function *(next) {
             this.body = {everything: 'is ok', time: new Date(), nev: '' + process.env.NODE_ENV};
         })
