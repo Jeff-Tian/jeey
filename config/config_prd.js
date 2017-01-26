@@ -1,1 +1,6 @@
-module.exports = {};
+module.exports = {
+    jeeyService: {
+        host: 'localhost',
+        port: 11211
+    }
+};
