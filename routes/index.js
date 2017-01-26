@@ -4,6 +4,7 @@ const config = require('../config');
 const mount = require('koa-mount');
 const parse = require('co-body');
 const proxy = require('./proxy');
+const Router = require('koa-router');
 
 const fs = require('fs');
 
@@ -26,6 +27,14 @@ function api(app, router, render) {
                 path: '/api/jeey',
                 data: data,
                 method: 'PUT'
+            });
+        })
+        .get('/api/jeey/:id', function*(next) {
+            this.body = yield proxy({
+                host: config.jeeyService.host,
+                port: config.jeeyService.port,
+                path: Router.url('/api/jeey/:id', {id: this.params.id}),
+                method: 'GET'
             });
         })
     ;

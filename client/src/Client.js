@@ -10,7 +10,7 @@ function proxy(method, url, data) {
         method: method
     };
 
-    if (data) {
+    if (method !== 'GET' && data) {
         option.body = JSON.stringify(data);
     }
 
@@ -42,13 +42,13 @@ function parseJSON(response) {
 }
 
 function proxyAndHandle(method, url, data, ctx) {
-    ctx.setState({
+    ctx && ctx.setState({
         loading: true
     });
 
     return proxy(method, url, data).then(checkStatus).then(parseJSON)
         .then(function (result) {
-            ctx.setState({
+            ctx && ctx.setState({
                 error: false,
                 loading: false,
                 success: true
@@ -57,7 +57,7 @@ function proxyAndHandle(method, url, data, ctx) {
             return result;
         })
         .catch(function (err) {
-            ctx.setState({
+            ctx && ctx.setState({
                 error: true,
                 errorMessage: err.message || JSON.stringify(err),
                 loading: false
@@ -71,5 +71,8 @@ const Client = {
     saveJeey: function (data, ctx) {
         return proxyAndHandle('PUT', '/api/jeey', data, ctx);
     },
+    getJeey: function (data, ctx) {
+        return proxyAndHandle('GET', `/api/jeey/${data.id}`, ctx);
+    }
 };
 export default Client;
