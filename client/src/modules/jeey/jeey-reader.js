@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Client from '../../Client';
-import classNames from 'classnames';
 
 export default React.createClass({
     getInitialState: function () {
