@@ -24,7 +24,8 @@ function api(app, router, render) {
                 host: config.jeeyService.host,
                 port: config.jeeyService.port,
                 path: '/api/jeey',
-                data: data
+                data: data,
+                method: 'PUT'
             });
         })
     ;

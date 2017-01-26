@@ -34,7 +34,7 @@ function parseJSON(response) {
         })
         .catch(function (reason) {
             function throwError(err) {
-                throw new Error(`服务器返回了错误的数据：${reason}，${err}`);
+                throw new Error(`服务器返回了意料之外的数据：${reason}，${err}`);
             }
 
             return clone.text().then(throwError, throwError);
@@ -50,7 +50,8 @@ function proxyAndHandle(method, url, data, ctx) {
         .then(function (result) {
             ctx.setState({
                 error: false,
-                loading: false
+                loading: false,
+                success: true
             });
 
             return result;

@@ -11,7 +11,10 @@ export default React.createClass({
 
         Client.saveJeey(this.state.jeey, this)
             .then(function (result) {
-                console.log(result);
+                self.setState({
+                    message: '叽歪成功！',
+                    link: result.insertId
+                });
             })
         ;
     },
@@ -36,10 +39,17 @@ export default React.createClass({
                     'ui': true,
                     'form': true,
                     'error': this.state.error,
-                    'loading': this.state.loading
+                    'loading': this.state.loading,
+                    'success': this.state.success
                 })} action="" onSubmit={this.saveJeey}>
                     <div className="ui error message">
                         <p>{this.state.errorMessage}</p>
+                    </div>
+                    <div className="ui success message">
+                        <p>
+                            {this.state.message}
+                            <a href={this.state.link} target="_blank">查看</a>
+                        </p>
                     </div>
                     <div className="field">
                         <textarea placeholder="来叽歪点什么吧……" value={this.state.jeey.text}
